@@ -3,8 +3,8 @@ import SddmComponents 2.0
 
 Rectangle {
     id: root
-    width: Screen.width
-    height: Screen.height
+    width: parent ? parent.width : 1920
+    height: parent ? parent.height : 1080
     color: "#000000"
 
     property string currentUser: userModel.lastUser
@@ -46,8 +46,8 @@ Rectangle {
         Column {
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: root.height * 0.01 
-            spacing: root.height * 0.01
+            anchors.bottomMargin: root.height * 0.02
+            spacing: root.height * 0.02
             
             Text {
                 text: "Enter Password"
@@ -67,7 +67,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     echoMode: TextInput.Password
                     font.family: "Sans"
-                    font.pixelSize: 14
+                    font.pixelSize: 12
                     font.letterSpacing: root.height * 0.004
                     passwordCharacter: "*"
                     color: "#ffffff"
