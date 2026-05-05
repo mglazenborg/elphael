@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.0
 import SddmComponents 2.0
 
 Rectangle {
@@ -31,70 +30,59 @@ Rectangle {
     }
 
 
-    Column {
+    AnimatedImage {
+        id: anim
+        source: "connect.gif"
         anchors.centerIn: parent
-        spacing: 0 //root.height * 0.04
+        fillMode: Image.PreserveAspectFit
+    }
+
+    Item {
+        id: passwordArea
         width: parent.width
+        height: root.height * 0.15
+        anchors.bottom: parent.bottom
 
-        AnimatedImage {
-            id: anim
-            source: "connect.gif"
+        Column {
             anchors.horizontalCenter: parent.horizontalCenter
-            fillMode: Image.PreserveAspectFit
-        }
-
-        Row {
-            anchors.horizontalCenter: parent.horizontalCenter
-            spacing: root.width * 0.007
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: root.height * 0.01
+            spacing: root.height * 0.01
 
             Text {
-                text: "\uf023"
+                text: "Enter Password"
                 color: "#ffffff"
-                font.family: "JetBrainsMono Nerd Font"
-                font.pixelSize: root.height * 0.025
-                anchors.verticalCenter: parent.verticalCenter
-            }
-
-            Rectangle {
-                width: root.width * 0.17
-                height: root.height * 0.04
-                color: "#000000"
-                border.color: "#ffffff"
-                border.width: 1
-                clip: true
-
-                TextInput {
-                    id: password
-                    anchors.fill: parent
-                    anchors.margins: root.height * 0.008
-                    verticalAlignment: TextInput.AlignVCenter
-                    echoMode: TextInput.Password
-                    font.family: "JetBrainsMono Nerd Font"
-                    font.pixelSize: root.height * 0.02
-                    font.letterSpacing: root.height * 0.004
-                    passwordCharacter: "\u2022"
-                    color: "#ffffff"
-                    focus: true
-
-                    Keys.onPressed: {
-                        if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                            sddm.login(root.currentUser, password.text, root.sessionIndex)
-                            event.accepted = true
-                        }
-                    }
-                }
+                font.family: "Sans"
+                font.pixelSize: 12
+                anchors.horizontalCenter: parent.horizontalCenter
             }
 
             Text {
-                id: errorMessage
-                text: ""
-                color: "#f7768e"
-                font.family: "JetBrainsMono Nerd Font"
-                font.pixelSize: root.height * 0.018
+                id: bulletDisplay
+                text: password.text.length > 0
+                      ? "*".repeat(password.text.length)
+                      : " "
+                color: "#ffffff"
+                font.family: "Sans"
+                font.pixelSize: 12
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }
+    }
 
-        Component.onCompleted: password.forceActiveFocus()
+    TextInput {
+        id: password
+        opacity: 0
+        width: 1
+        height: 1
+        focus: true
+        anchors.bottom: parent.bottom
+
+        Keys.onPressed: function(event) {
+            if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
+                sddm.login(root.currentUser, password.text, root.sessionIndex)
+                event.accepted = true
+            }
+        }
     }
 }
