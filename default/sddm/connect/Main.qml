@@ -53,7 +53,7 @@ Rectangle {
                 text: "Enter Password"
                 color: "#ffffff"
                 font.family: "Sans"
-                font.pixelSize: 18
+                font.pixelSize: 16
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -67,7 +67,7 @@ Rectangle {
                     anchors.horizontalCenter: parent.horizontalCenter
                     echoMode: TextInput.Password
                     font.family: "Sans"
-                    font.pixelSize: 12
+                    font.pixelSize: 16
                     font.letterSpacing: root.height * 0.0005
                     passwordCharacter: "*"
                     color: "#ffffff"
