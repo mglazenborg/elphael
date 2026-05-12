@@ -68,7 +68,6 @@ Rectangle {
                     echoMode: TextInput.Password
                     font.family: "Sans"
                     font.pixelSize: 16
-                    font.letterSpacing: root.height * 0.0005
                     passwordCharacter: "*"
                     color: "#ffffff"
                     focus: true
